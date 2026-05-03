@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+
+const logs = (await getCollection('logs')).sort((a, b) => 
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+<div class="dev-logs-section" style="display: flex; flex-direction: column; height: 100%;">
+  <h2 class="dev-logs-heading">dev logs</h2>
+  <div class="dev-logs-scroll">
+    {logs.map((log, i) => (
+      <div class="card log-card">
+        {i === 0 && <span class="new-badge">New!</span>}
+        <h3>{log.data.title}</h3>
+        <p>{log.data.description}</p>
+        <a href={`/devlog/${log.id}`}>
+          <button>read me!</button>
+        </a>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .log-card {
+    position: relative;
+  }
+
+  .new-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background-color: var(--btn-bg);
+    color: #FFFFFF;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+</style>

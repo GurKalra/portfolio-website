@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg-color: #f2efe1;
+  --text-primary: #1A1A1A;
+  --text-secondary: #6B6B6B;
+  --card-bg: #FFFFFF;
+  --btn-bg: #2C2C2C;
+  --btn-text: #FFFFFF;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  cursor: url('/cursor.svg') 5 3, auto;
+}
+
+a, button, [role="button"], input[type="submit"], .project-card, .social-icon {
+  cursor: url('/cursor.svg') 5 3, pointer;
+}
+
+html, body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Base styles */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+p {
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+button:hover {
+  background-color: #1a1a1a;
+  transform: translateY(-2px);
+}
+
+/* Layout */
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 2rem calc(4rem + 28px) 0 calc(4rem + 28px);
+  max-width: 1400px;
+  margin: 0 auto;
+  container-type: inline-size;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  z-index: 10;
+}
+
+.header-me {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  margin-bottom: 0;
+  line-height: 1;
+}
+
+.header-center {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.header-icons {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.5rem;
+}
+
+.header-icons svg {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.header-icons svg:hover {
+  transform: scale(1.1);
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.top-row {
+  display: flex;
+  gap: 4rem;
+}
+
+.left-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.right-col {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cards */
+.card {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+}
+
+.card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.card p {
+  margin-bottom: 1.5rem;
+}
+
+/* Left Col Details */
+.who-am-i-heading {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.check-out-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+/* Right Col Details */
+.dev-logs-heading {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.dev-logs-scroll {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 1rem;
+  padding-bottom: 2rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  /* Mask image creates a fade out at the bottom to look deliberately cut */
+  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
+
+/* Scrollbar styling for dev logs */
+.dev-logs-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Animation Classes */
+.reveal-content {
+  /* clip-path will be set via JS */
+  will-change: clip-path;
+}
+
+.me-animator {
+  display: inline-block;
+  will-change: transform;
+}

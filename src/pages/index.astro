@@ -1,0 +1,74 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import WhoAmI from '../components/WhoAmI.astro';
+import DevLogs from '../components/DevLogs.astro';
+import Projects from '../components/Projects.astro';
+import Skills from '../components/Skills.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import HelloScroller from '../components/HelloScroller.astro';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<title>My Portfolio</title>
+		<style is:global>
+			/* Initial states for animation to prevent FOUC */
+			body:not(.loaded) .me-animator {
+				transform: translateX(100cqi);
+			}
+			body:not(.loaded) .reveal-content {
+				clip-path: inset(0 0 0 100cqi);
+			}
+			/* Transition definitions */
+			.me-animator {
+				transition: transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+			}
+			.reveal-content {
+				transition: clip-path 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+			}
+		</style>
+	</head>
+	<body>
+		<HelloScroller />
+		<div class="layout-container">
+			<Header />
+			<main class="main-content reveal-content">
+				<div class="top-row">
+					<div class="left-col">
+						<WhoAmI />
+					</div>
+					<div class="right-col">
+						<DevLogs />
+					</div>
+				</div>
+				<Projects />
+				<Skills />
+				<Contact />
+			</main>
+		</div>
+		<Footer />
+
+		<script>
+			// Wait for a tiny bit after load to trigger the transition
+			window.addEventListener('load', () => {
+				requestAnimationFrame(() => {
+					requestAnimationFrame(() => {
+						document.body.classList.add('loaded');
+						
+						// Need to make sure clip-path rests at 0
+						const reveals = document.querySelectorAll('.reveal-content');
+						reveals.forEach(el => {
+							el.style.clipPath = 'inset(0 0 0 0)';
+						});
+					});
+				});
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,431 @@
+---
+import { getCollection, render } from 'astro:content';
+import '../../styles/global.css';
+import HelloScroller from '../../components/HelloScroller.astro';
+
+export async function getStaticPaths() {
+  const logs = await getCollection('logs');
+  return logs.map(log => ({
+    params: { slug: log.id },
+  }));
+}
+
+// Get all logs for the index modal
+const allLogs = (await getCollection('logs')).sort((a, b) => 
+  new Date(a.data.date).getTime() - new Date(b.data.date).getTime()
+);
+
+// Get the current log from the slug
+const { slug } = Astro.params;
+const log = allLogs.find(l => l.id === slug);
+
+if (!log) {
+  return Astro.redirect('/');
+}
+
+const { Content } = await render(log);
+
+// Build the "dev logs" scrolling text (30 repetitions for seamless loop)
+const scrollLines = Array(30).fill('dev logs').join('<br>');
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{log.data.title} — dev log</title>
+  </head>
+  <body>
+    <HelloScroller />
+
+    <div class="devlog-page">
+      <p class="devlog-breadcrumb">dev log to read</p>
+
+      <!-- Buttons — sit on top of everything -->
+      <a href="/" class="devlog-btn go-back-btn">go back</a>
+      <button class="devlog-btn index-btn" id="index-toggle">index</button>
+
+      <!-- Dark content card -->
+      <div class="devlog-content-card">
+        <div class="devlog-body">
+          <h1 class="devlog-title">{log.data.title}</h1>
+          {log.data.description && <p class="devlog-description">{log.data.description}</p>}
+          <p class="devlog-date">{new Date(log.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+          <div class="devlog-prose">
+            <Content />
+          </div>
+        </div>
+      </div>
+
+      <!-- Infinite scrolling text -->
+      <div class="scrolling-text-container">
+        <div class="scroll-wrapper">
+          <div class="scrolling-text" set:html={scrollLines} />
+          <div class="scrolling-text" aria-hidden="true" set:html={scrollLines} />
+        </div>
+      </div>
+
+      <!-- Index overlay + modal -->
+      <div class="index-overlay" id="index-overlay"></div>
+      <div class="index-modal" id="index-modal">
+        <h2>index</h2>
+        <ul class="index-list">
+          {allLogs.map((entry, i) => (
+            <li>
+              <a href={`/devlog/${entry.id}`} class:list={[{ active: entry.id === slug }]}>
+                <span class="index-number">{String(i + 1).padStart(2, '0')}</span>
+                <span class="index-entry-title">{entry.data.title}</span>
+                {entry.data.description && (
+                  <span class="index-entry-desc"> - {entry.data.description}</span>
+                )}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const toggle = document.getElementById('index-toggle');
+        const overlay = document.getElementById('index-overlay');
+        const modal = document.getElementById('index-modal');
+        const page = document.querySelector('.devlog-page');
+
+        function openIndex() {
+          overlay?.classList.add('active');
+          modal?.classList.add('active');
+        }
+
+        function closeIndex() {
+          overlay?.classList.remove('active');
+          modal?.classList.remove('active');
+        }
+
+        toggle?.addEventListener('click', () => {
+          if (modal?.classList.contains('active')) {
+            closeIndex();
+          } else {
+            openIndex();
+          }
+        });
+
+        overlay?.addEventListener('click', closeIndex);
+
+        // Smooth page transitions for index links
+        const indexLinks = document.querySelectorAll('.index-list a');
+        indexLinks.forEach(link => {
+          link.addEventListener('click', (e) => {
+            // Skip if it's the current page
+            if (link.classList.contains('active')) {
+              e.preventDefault();
+              closeIndex();
+              return;
+            }
+            e.preventDefault();
+            const href = link.getAttribute('href');
+            
+            // Fade out the page
+            document.body.classList.add('page-leaving');
+            
+            setTimeout(() => {
+              window.location.href = href;
+            }, 300);
+          });
+        });
+
+        // Fade in on load
+        document.body.classList.add('page-loaded');
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  body {
+    margin: 0;
+    background-color: var(--bg-color);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  body.page-loaded {
+    opacity: 1;
+  }
+
+  body.page-leaving {
+    opacity: 0;
+  }
+
+  .devlog-page {
+    position: relative;
+    min-height: 100vh;
+    padding: 1.5rem calc(4rem + 28px);
+  }
+
+  .devlog-breadcrumb {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+  }
+
+  /* Buttons */
+  .devlog-btn {
+    position: fixed;
+    right: calc(4rem + 28px);
+    z-index: 20;
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    border: none;
+    padding: 0.75rem 1.8rem;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s;
+  }
+
+  .devlog-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .go-back-btn {
+    top: 2rem;
+  }
+
+  .index-btn {
+    bottom: 2rem;
+  }
+
+  /* Content card */
+  .devlog-content-card {
+    background-color: var(--bg-color);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    padding: 3rem 3rem 4rem;
+    width: calc(100% - 220px);
+    min-height: 80vh;
+    position: relative;
+    z-index: 2;
+  }
+
+  .devlog-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+
+  .devlog-description {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.25rem;
+    font-style: italic;
+  }
+
+  .devlog-date {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    opacity: 0.7;
+    margin-bottom: 2rem;
+  }
+
+  .devlog-prose {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .devlog-prose :global(p) {
+    margin-bottom: 1rem;
+  }
+
+  .devlog-prose :global(h2) {
+    font-size: 1.4rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+  }
+
+  .devlog-prose :global(h3) {
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+
+  .devlog-prose :global(code) {
+    background-color: rgba(0,0,0,0.06);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+
+  .devlog-prose :global(pre) {
+    background-color: var(--btn-bg);
+    color: #eee;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+  }
+
+  .devlog-prose :global(pre code) {
+    background: none;
+    padding: 0;
+    color: inherit;
+  }
+
+  .devlog-prose :global(img) {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 1rem;
+    margin-bottom: 0.25rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  /* Italic text right after an image acts as a caption */
+  .devlog-prose :global(img + em),
+  .devlog-prose :global(p:has(img) + p em:only-child) {
+    display: block;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    opacity: 0.7;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Infinite scrolling text */
+  .scrolling-text-container {
+    position: fixed;
+    top: 0;
+    right: calc(5rem + 28px);
+    height: 100vh;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .scroll-wrapper {
+    display: flex;
+    flex-direction: column;
+    animation: scroll-vertical 25s linear infinite;
+    will-change: transform;
+  }
+
+  .scrolling-text {
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #1A1A1A;
+    text-align: right;
+  }
+
+  @keyframes scroll-vertical {
+    from { transform: translateY(0); }
+    to { transform: translateY(-50%); }
+  }
+
+  /* Index overlay */
+  .index-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-color);
+    opacity: 0;
+    z-index: 30;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .index-overlay.active {
+    opacity: 0.85;
+    pointer-events: auto;
+  }
+
+  /* Index modal */
+  .index-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 2.5rem;
+    min-width: 400px;
+    max-width: 600px;
+    width: 90vw;
+    z-index: 31;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .index-modal.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+  }
+
+  .index-modal h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+  }
+
+  .index-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .index-list li a {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    transition: background-color 0.15s ease;
+  }
+
+  .index-list li a:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  .index-list li a.active {
+    font-weight: 700;
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+
+  .index-number {
+    font-weight: 700;
+    font-size: 0.9rem;
+    min-width: 1.8em;
+    color: var(--text-primary);
+  }
+
+  .index-entry-title {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .index-entry-desc {
+    font-weight: 400;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+</style>

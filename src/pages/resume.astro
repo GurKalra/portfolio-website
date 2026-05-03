@@ -1,0 +1,132 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ResumeScroller from '../components/ResumeScroller.astro';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Resume</title>
+		<style is:global>
+			/* Initial states for animation to prevent FOUC */
+			body:not(.loaded) .me-animator {
+				transform: translateX(100cqi);
+			}
+			body:not(.loaded) .reveal-content {
+				clip-path: inset(0 0 0 100cqi);
+			}
+			/* Transition definitions */
+			.me-animator {
+				transition: transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+			}
+			.reveal-content {
+				transition: clip-path 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+			}
+            
+            .resume-section {
+                position: relative;
+                width: 100%;
+            }
+            .resume-container {
+                width: 100%;
+                height: 85vh; /* Taking up most of the viewport height */
+                margin-top: 3rem;
+                margin-bottom: 3rem;
+                border: 2px solid var(--text-primary);
+                border-radius: 4px;
+                overflow: hidden;
+                position: relative;
+                z-index: 2;
+            }
+            .resume-iframe {
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+
+            /* Infinite Scrolling Text */
+            .scrolling-text-container {
+                position: absolute;
+                top: 0;
+                right: 2.5rem;
+                height: 100%;
+                overflow: hidden;
+                z-index: 0;
+            }
+
+            .scroll-wrapper {
+                display: flex;
+                flex-direction: column;
+                animation: scroll-vertical 25s linear infinite;
+                will-change: transform;
+            }
+
+            .scrolling-text {
+                font-size: 1.8rem;
+                font-weight: 800;
+                line-height: 1.2;
+                color: #1A1A1A;
+                text-align: right;
+            }
+
+            @keyframes scroll-vertical {
+                from {
+                transform: translateY(0);
+                }
+                to {
+                transform: translateY(-50%);
+                }
+            }
+		</style>
+	</head>
+	<body>
+		<ResumeScroller />
+		<div class="layout-container">
+			<Header />
+			<main class="main-content reveal-content">
+                <div class="resume-section">
+                    <div class="resume-container">
+                        <object data="/resume/resume.pdf" type="application/pdf" class="resume-iframe">
+                            <p>It appears you don't have a PDF plugin for this browser. No biggie... you can <a href="/resume/resume.pdf">click here to download the PDF file.</a></p>
+                        </object>
+                    </div>
+
+                    <!-- Infinite Scrolling Text -->
+                    <div class="scrolling-text-container">
+                        <div class="scroll-wrapper">
+                        <div class="scrolling-text">
+                            resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume
+                        </div>
+                        <div class="scrolling-text" aria-hidden="true">
+                            resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume<br>resume
+                        </div>
+                        </div>
+                    </div>
+                </div>
+			</main>
+		</div>
+		<Footer />
+
+		<script>
+			// Wait for a tiny bit after load to trigger the transition
+			window.addEventListener('load', () => {
+				requestAnimationFrame(() => {
+					requestAnimationFrame(() => {
+						document.body.classList.add('loaded');
+						
+						// Need to make sure clip-path rests at 0
+						const reveals = document.querySelectorAll('.reveal-content');
+						reveals.forEach(el => {
+							el.style.clipPath = 'inset(0 0 0 0)';
+						});
+					});
+				});
+			});
+		</script>
+	</body>
+</html>

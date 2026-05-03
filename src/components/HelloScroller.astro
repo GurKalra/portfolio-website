@@ -1,0 +1,94 @@
+---
+// "Hello" in many languages
+const hellos = [
+  "hello", "नमस्ते", "hola", "bonjour", "こんにちは", "안녕하세요",
+  "ciao", "olá", "привет", "مرحبا", "hallo", "你好",
+  "สวัสดี", "merhaba", "xin chào", "γεια σας", "שלום",
+  "habari", "aloha", "sawubona", "hej", "hei",
+  "cześć", "ahoj", "salut", "szia", "tere",
+  "สวัสดี", "kamusta", "buna", "здравейте", "selam",
+  "hallå", "hei", "oi", "selamat", "jambo",
+  "salam", "përshëndetje", "dia dhuit", "kia ora", "talofa",
+  "bula", "malo", "halo", "kumusta", "barev",
+  "gamarjoba", "sveiki", "labas", "dobrý deň", "bok",
+  "živjo", "terve", "halló", "hæ", "moïen"
+];
+
+const scrollText = hellos.join(" · ");
+---
+
+<div class="hello-scroller-left">
+  <div class="hello-track">
+    <div class="hello-text">{scrollText} · {scrollText} · {scrollText} · </div>
+    <div class="hello-text" aria-hidden="true">{scrollText} · {scrollText} · {scrollText} · </div>
+  </div>
+</div>
+
+<div class="hello-scroller-right">
+  <div class="hello-track hello-track-reverse">
+    <div class="hello-text">{scrollText} · {scrollText} · {scrollText} · </div>
+    <div class="hello-text" aria-hidden="true">{scrollText} · {scrollText} · {scrollText} · </div>
+  </div>
+</div>
+
+<style>
+  .hello-scroller-left,
+  .hello-scroller-right {
+    position: fixed;
+    top: 0;
+    width: 28px;
+    height: 100vh;
+    background-color: var(--btn-bg);
+    z-index: 50;
+    overflow: hidden;
+  }
+
+  .hello-scroller-left {
+    left: 0;
+  }
+
+  .hello-scroller-right {
+    right: 0;
+  }
+
+  .hello-track {
+    display: flex;
+    flex-direction: column;
+    animation: hello-scroll-down 120s linear infinite;
+    will-change: transform;
+  }
+
+  .hello-track-reverse {
+    animation: hello-scroll-up 120s linear infinite;
+  }
+
+  .hello-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    white-space: nowrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    padding: 0 4px;
+    letter-spacing: 0.05em;
+  }
+
+  @keyframes hello-scroll-down {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-50%);
+    }
+  }
+
+  @keyframes hello-scroll-up {
+    from {
+      transform: translateY(-50%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+</style>

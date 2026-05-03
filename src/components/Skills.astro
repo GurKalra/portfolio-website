@@ -1,0 +1,244 @@
+---
+---
+<div class="skills-section">
+  <h2 class="skills-heading">skills</h2>
+
+  <!-- Infinite Scrolling Text -->
+  <div class="scrolling-text-container">
+    <div class="scroll-wrapper">
+      <div class="scrolling-text">
+        skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills
+      </div>
+      <div class="scrolling-text" aria-hidden="true">
+        skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills<br>skills
+      </div>
+    </div>
+  </div>
+
+  <div class="skills-canvas">
+    <!-- Easily add more skills by copying a block and updating top/left percentages -->
+    
+    <div class="skill-block" style="top: 10%; left: 10%;">
+      <h4>01: core languages</h4>
+      <p>c++, python, c#, java, c, gdscript</p>
+    </div>
+
+    <div class="skill-block" style="top: 35%; left: 5%;">
+      <h4>02: game development</h4>
+      <p>unity, godot, custom game loops, rapid prototyping, pixel art</p>
+    </div>
+
+    <div class="skill-block" style="top: 10%; left: 55%;">
+      <h4>03: systems & os</h4>
+      <p>linux architecture, bash & posix, btrfs & timeshift, docker, initramfs</p>
+    </div>
+
+    <div class="skill-block" style="top: 55%; left: 35%;">
+      <h4>04: ai & machine learning</h4>
+      <p>tensorflow.js, gemini api, spacy nlp, rag pipelines, xgboost</p>
+    </div>
+
+    <div class="skill-block" style="top: 75%; left: 10%;">
+      <h4>05: full-stack web</h4>
+      <p>next.js, react, tailwind css, fastapi, d3.js</p>
+    </div>
+
+    <div class="skill-block" style="top: 80%; left: 50%;">
+      <h4>06: desktop & databases</h4>
+      <p>java swing, jdbc, sqlite, strict mvc, flatlaf</p>
+    </div>
+
+    <div class="skill-block" style="top: 35%; left: 65%;">
+      <h4>07: cloud & devops</h4>
+      <p>aws cloud foundations, aws data engineering, pytest, git, apache maven</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .skills-section {
+    position: relative;
+    margin-top: 4rem;
+    padding-bottom: 4rem;
+    z-index: 1;
+    min-height: 600px; /* Provide enough height for the canvas */
+  }
+
+  .skills-heading {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    padding-left: 2rem; /* Align with general padding */
+  }
+
+  .skills-canvas {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    /* Use relative container so absolute children are placed within it */
+  }
+
+  .skill-block {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    cursor: grab;
+    user-select: none; /* Prevent text selection while dragging */
+    touch-action: none; /* Prevent scrolling on mobile when dragging */
+    max-width: 320px; /* Prevent text from spanning the whole screen */
+    
+    /* Center transform handles both positioning and floating offsets */
+    transform: translate(0, 0);
+    will-change: transform;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .skill-block:active {
+    cursor: grabbing;
+  }
+
+  /* Different animation delays to make them float out of sync */
+  .skill-block:nth-child(1) { animation-delay: 0s; }
+  .skill-block:nth-child(2) { animation-delay: 0.8s; }
+  .skill-block:nth-child(3) { animation-delay: 1.5s; }
+  .skill-block:nth-child(4) { animation-delay: 2.2s; }
+  .skill-block:nth-child(5) { animation-delay: 3.1s; }
+  .skill-block:nth-child(6) { animation-delay: 0.5s; }
+  .skill-block:nth-child(7) { animation-delay: 1.2s; }
+  .skill-block:nth-child(8) { animation-delay: 2.8s; }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+
+  /* When JS adds the .dragging class, we disable the float animation */
+  .skill-block.dragging {
+    animation: none;
+    z-index: 50; /* Bring to front while dragging */
+  }
+
+  /* When released, JS adds .spring-back to smoothly return to origin */
+  .skill-block.spring-back {
+    animation: none; /* Temporarily disable float while springing back */
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); /* Bouncy spring curve */
+  }
+
+  .skill-block h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    color: var(--text-primary);
+    pointer-events: none; /* Pass clicks to parent div for easier dragging */
+  }
+
+  .skill-block p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    pointer-events: none;
+  }
+
+  /* Infinite Scrolling Text */
+  .scrolling-text-container {
+    position: absolute;
+    top: 0;
+    right: 2.5rem;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .scroll-wrapper {
+    display: flex;
+    flex-direction: column;
+    animation: scroll-vertical 25s linear infinite;
+    will-change: transform;
+  }
+
+  .scrolling-text {
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #1A1A1A;
+    text-align: right;
+  }
+
+  @keyframes scroll-vertical {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-50%);
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const skillBlocks = document.querySelectorAll('.skill-block');
+
+    skillBlocks.forEach(block => {
+      let isDragging = false;
+      let startX, startY;
+      let currentX = 0;
+      let currentY = 0;
+
+      const onMouseDown = (e) => {
+        isDragging = true;
+        
+        // Use clientX/Y for mouse, touches[0] for touch
+        const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+        const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+
+        startX = clientX - currentX;
+        startY = clientY - currentY;
+
+        // Remove the return animation class if it's there
+        block.classList.remove('spring-back');
+        block.classList.add('dragging');
+      };
+
+      const onMouseMove = (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+
+        const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+        const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+
+        currentX = clientX - startX;
+        currentY = clientY - startY;
+
+        block.style.transform = `translate(${currentX}px, ${currentY}px)`;
+      };
+
+      const onMouseUp = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        
+        block.classList.remove('dragging');
+        block.classList.add('spring-back');
+        
+        // Reset transform to let the spring animation bring it back to (0,0)
+        currentX = 0;
+        currentY = 0;
+        block.style.transform = `translate(0px, 0px)`;
+
+        // After the transition ends, remove the class to restart the float animation
+        setTimeout(() => {
+          if (!isDragging) {
+            block.classList.remove('spring-back');
+          }
+        }, 500); // matches the 0.5s transition time
+      };
+
+      block.addEventListener('mousedown', onMouseDown);
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
+
+      // Touch support
+      block.addEventListener('touchstart', onMouseDown, { passive: false });
+      document.addEventListener('touchmove', onMouseMove, { passive: false });
+      document.addEventListener('touchend', onMouseUp);
+    });
+  });
+</script>
