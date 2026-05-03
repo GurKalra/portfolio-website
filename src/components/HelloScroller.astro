@@ -1,4 +1,10 @@
 ---
+interface Props {
+  overrideText?: string;
+}
+
+const { overrideText } = Astro.props;
+
 // "Hello" in many languages
 const hellos = [
   "hello", "नमस्ते", "hola", "bonjour", "こんにちは", "안녕하세요",
@@ -14,7 +20,7 @@ const hellos = [
   "živjo", "terve", "halló", "hæ", "moïen"
 ];
 
-const scrollText = hellos.join(" · ");
+const scrollText = overrideText ? Array(50).fill(overrideText).join(" · ") : hellos.join(" · ");
 ---
 
 <div class="hello-scroller-left">

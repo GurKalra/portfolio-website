@@ -1,6 +1,6 @@
 ---
-title: "Finally made my portfolio website"
-description: "I finally made my website, and I would like to say I cooked"
+title: "finally made my portfolio website"
+description: "i finally made my website, and i would like to say i cooked"
 date: 2026-05-04
 ---
 For a while now I have been skipping out on making a website. Is it because I don't know how to code crazy good JS or CSS, or use the Framers and Reacts of the world? Well... lowkey yes.
