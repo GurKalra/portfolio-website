@@ -12,7 +12,7 @@ const projects = [
     description: "a proactive, root-level linux system guardian. it hooks directly into native package managers to predict, prevent, and recover from system-breaking os updates before execution.",
     skills: ["linux system architecture", "python & pytest", "btrfs & timeshift", "bash & posix scripts", "multi-threaded tui"],
     what: "a system-level guardian that intercepts package manager transactions on linux. it creates automatic filesystem snapshots before updates, analyzes dependency trees for breaking changes, and provides one-command rollback when things go wrong.",
-    why: "linux updates can silently break systems. prescient was born from losing a working setup to a routine apt upgrade. instead of reacting to damage, it predicts and prevents it — turning system maintenance from a gamble into a safety net.",
+    why: "linux updates can silently break systems (personal experience (2x)). prescient was born from losing a working setup to a routine apt upgrade. instead of reacting to damage, it predicts and prevents it, it turns system maintenance from a gamble into a safety net.",
     liveLink: null,
     liveMessage: "this one's only github!",
     githubLink: "https://github.com/GurKalra/prescient-linux"
@@ -21,23 +21,13 @@ const projects = [
     title: "slither fade",
     description: "a snake-inspired survival game built in unity. it introduces a unique time-based mechanic where the snake shrinks every seven seconds, requiring strategic use of a dual food system to balance growth and survival time.",
     skills: ["unity & c# scripting", "custom time-based mechanics", "dynamic state management", "collision handling", "iterative balancing & playtesting"],
-    what: "a snake game with a twist — your snake constantly shrinks every seven seconds. two food types exist: one grows your length, the other buys you time. the core loop forces split-second decisions between growth and survival.",
+    what: "a snake game with a twist! your snake constantly shrinks every seven seconds. two food types exist: one grows your length, the other buys you time. the core loop forces split-second decisions between growth and survival.",
     why: "most snake games reward patience. slither fade punishes it. the shrinking mechanic was designed to create constant tension and make every food pickup feel meaningful, turning a classic formula into something genuinely stressful.",
     liveLink: "https://gurgames.itch.io/slither-fade",
     liveMessage: null,
     githubLink: "https://github.com/GurKalra/Slither-Fade"
   },
-  {
-    title: "insightnet",
-    description: "an ai-powered document intelligence platform. it uses an advanced nlp pipeline and graph analytics to extract hidden relationships and generate structured insights from unstructured data.",
-    skills: ["fastapi backend", "spacy nlp pipeline", "networkx graph analytics", "react & d3 visualization", "sqlite persistence"],
-    what: "a document intelligence platform that processes unstructured text through spacy nlp pipelines, extracts named entities and relationships, builds knowledge graphs with networkx, and visualizes connections through an interactive d3-powered frontend.",
-    why: "reading documents is slow. finding connections between them is slower. insightnet automates the pattern-finding that humans do poorly at scale — surfacing relationships buried across hundreds of pages in seconds.",
-    liveLink: null,
-    liveMessage: "this one's only github!",
-    githubLink: "https://github.com/GurKalra/InsightAI"
-  },
-  {
+    {
     title: "twisteeper",
     description: "a minesweeper variant built in godot during a two-day game development challenge. it introduces innovative mechanics like rotating boards and immovable flagged cells, complete with custom pixel art and cross-platform deployment.",
     skills: ["godot engine & gdscript", "grid generation & logic", "custom rotation mechanics", "pixel art integration", "cross-platform deployment"],
@@ -46,6 +36,16 @@ const projects = [
     liveLink: "https://gurgames.itch.io/twisteeper",
     liveMessage: null,
     githubLink: "https://github.com/GurKalra/twisteeper"
+  },
+  {
+    title: "insightnet",
+    description: "an ai-powered document intelligence platform. it uses an advanced nlp pipeline and graph analytics to extract hidden relationships and generate structured insights from unstructured data.",
+    skills: ["fastapi backend", "spacy nlp pipeline", "networkx graph analytics", "react & d3 visualization", "sqlite persistence"],
+    what: "a document intelligence platform that processes unstructured text through spacy nlp pipelines, extracts named entities and relationships, builds knowledge graphs with networkx, and visualizes connections through an interactive d3-powered frontend.",
+    why: "reading documents is slow. finding connections between them is slower. insightnet automates the pattern-finding that humans do poorly at scale. it helps in surfacing relationships buried across hundreds of pages in seconds.",
+    liveLink: null,
+    liveMessage: "this one's only github!",
+    githubLink: "https://github.com/GurKalra/InsightAI"
   },
   {
     title: "labta",
@@ -66,26 +66,6 @@ const projects = [
     liveLink: "https://gurgames.itch.io/gem-catcher",
     liveMessage: null,
     githubLink: "https://github.com/GurKalra/Gem-Catcher"
-  },
-  {
-    title: "hero squad optimizer",
-    description: "a web-based dungeons & dragons party optimization tool built during a 36-hour hackathon. it combines a tensorflow.js neural network with the gemini llm to deliver predictive encounter success rates and generative strategy recommendations.",
-    skills: ["next.js & react frontend", "tensorflow.js neural networks", "google gemini llm integration", "next.js api routes", "predictive ml & generative strategy"],
-    what: "a d&d party optimization tool that feeds party compositions into a tensorflow.js neural network to predict encounter success rates, then routes the results through google gemini for strategic narrative recommendations.",
-    why: "built in 36 hours at a hackathon. the idea was to combine predictive ml with generative ai — using numbers to find optimal parties and language to explain why they work, bridging data science and storytelling.",
-    liveLink: "https://v0-hero-squad-optimizer.vercel.app",
-    liveMessage: null,
-    githubLink: "https://github.com/GurKalra/HackSummit-hero-squad-optimizer"
-  },
-  {
-    title: "welfare scheme system",
-    description: "a comprehensive, multi-user desktop application designed to streamline welfare scheme management. built with java swing and jdbc, it uses a strict mvc architecture to provide secure role-based access for citizens, officers, and administrators.",
-    skills: ["java swing & flatlaf ui", "jdbc & secure databases", "strict mvc architecture", "apache maven packaging", "role-based access control"],
-    what: "a multi-user desktop application with role-based access for citizens, officers, and administrators. citizens apply for welfare schemes, officers review and process applications, and admins manage the entire system through a strict mvc architecture.",
-    why: "welfare systems are bureaucratic mazes. this project digitizes the process with clear role separation and audit trails — making scheme discovery, application, and approval transparent for everyone involved.",
-    liveLink: null,
-    liveMessage: "this one's only github!",
-    githubLink: "https://github.com/GurKalra/Welfare-Scheme-System"
   }
 ];
 
