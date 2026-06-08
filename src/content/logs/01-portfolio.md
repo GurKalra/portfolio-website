@@ -11,7 +11,7 @@ I had heard the word wireframe a lot but never really knew what it was. Accordin
 
 According to me it is a drawing of how I want my website to look. Ok it is what the definition says. NOT THE POINT.
 
-## Figma Was A Pain
+### Figma Was A Pain
 
 This was my first time using Figma and honestly, it felt exactly like the first time I opened Unity. Just a cockpit of panels and buttons and I had zero no idea what any of them did. Like what does this button do? How do I select only one component in this? How am I supposed to change the font size? (actually had to google it btw)
 
@@ -22,9 +22,10 @@ But I pushed through it and I'm so happy I did. Having an actual wireframe befor
 
 ![figma wireframe-02](/images/logs/wireframe-02.png)
 *how the dev logs pages were planned*
+
 ---
 
-## Now the tough part. Coding.
+### Now the tough part. Coding.
 
 I did use AI, but I also genuinely learnt a lot while building this. Like there's a JS framework called **Astro**. It's supposed to be fast as hell and handles static sites really cleanly. (Says the guy whose website has animations on literally everything, but still "static".) 
 
@@ -62,7 +63,7 @@ That's it. It's sliding the entire wrapper up by 50% and since there are two ide
 
 ---
 
-## Now What I'm Actually Proud Of
+### Now What I'm Actually Proud Of
 
 The website as a whole honestly. Actually sitting down and *designing* something, then *building* it, and now *writing a log* on it. This full cycle is something I've never really done before.
 
@@ -70,7 +71,7 @@ And the look of the website. I have wanted to make something like this for a whi
 
 ---
 
-## Sooo Why Logs?
+### Sooo Why Logs?
 
 Finally making a portfolio also got me to finally write logs. Another thing I've wanted to do for a long time. The thing is I work on all these projects and I want to have a record of them.
 

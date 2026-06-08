@@ -9,8 +9,8 @@ Unity is like a cockpit when you open it for the first time, but it gets better 
 
 Until I decided to make a full-fledged game and everything decided it wanted to end me personally.
 
-## So what really happened?
-
+### So what really happened?
+npx @astrojs/upgrade
 I was trying to make a game called **As Above**.
 
 The idea came from a text my dad sent me a while back:
@@ -22,7 +22,8 @@ Game idea - there are sets of people, and you are God. As God, you need to put w
 First reaction: I was proud of my dad. My dad giving me game ideas like, *how cool is that?*
 Second reaction: oh i need to do some thinking now to actually make it work.
 
-## What is the game?
+---
+### What is the game?
 
 You are God over a small village. People arrive at your door. You read their file and decide how much burden to give them according to their work, their responsibility, their current situation, etc. Once decided, it's locked. You move on. The village lives with what you chose.
 
@@ -64,7 +65,8 @@ When someone breaks, the severity depends on how far over capacity they were: wi
 
 _FUN FACT: Currently this all is in the debug logs. Hence I started with the UI and boy oh boy i was *mesmerised*_
 
-## Making the thing
+---
+### Making the thing
 
 After a lot of ideation, two weeks, to be exact the final design was settled and was with us (there is no "us" by the way, it's just me.)
 
@@ -74,7 +76,8 @@ Development started smooth enough. Write code. Watch YouTube to understand corou
 * Get a weight assigned to them
 * Roam around with proximity logic so they can form "connections" (connections is a strong word, call it a list of the people they come across most, based on their random movement)
 
-## The pain
+---
+### The pain
 
 Now it was time to add user input, because this is a video *game* and not just a video (I don't know why I try with the puns).
 
@@ -96,6 +99,8 @@ Here is the very basic UI that took me longer to build than the main game logic 
 
 ![the final ui](/images/logs/ui.png)
 
-## Next steps
+---
+
+### Next steps
 
 I will continue working on the game and will keep updating here. This is, I believe, the first of many crashes over the exact same thing.
