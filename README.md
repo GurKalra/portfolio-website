@@ -4,10 +4,10 @@
 ![HTML](https://img.shields.io/badge/HTML-E34F26?style=flat&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS-1572B6?style=flat&logo=css3&logoColor=white)
  
-My personal portfolio website. Built with Astro, HTML, and CSS.
+My personal portfolio website. Built with Astro, HTML, and CSS. (also love _smily emoji_)
  
 ---
- 
+ALSO HAS AMAZING LOGS ABOUT THE WORK I HAVE BEEN DOING!!!!!
 But honestly, why are you reading the README? It's a portfolio website just go here: 
 
 [Amazing Portfolio website](https://gurvansh.is-a.dev)
