@@ -26,6 +26,22 @@ html, body {
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #000000 transparent;
+}
+
+/* Global scrollbar — webkit */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #000000;
+  border-radius: 999px;
 }
 
 /* Base styles */
@@ -180,10 +196,10 @@ button:hover {
 .dev-logs-scroll {
   max-height: 400px;
   overflow-y: auto;
-  padding-right: 1rem;
+  padding-right: 0.5rem;
   padding-bottom: 2rem;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: #000000 transparent;
   /* Mask image creates a fade out at the bottom to look deliberately cut */
   mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
@@ -191,7 +207,16 @@ button:hover {
 
 /* Scrollbar styling for dev logs */
 .dev-logs-scroll::-webkit-scrollbar {
-  display: none;
+  width: 4px;
+}
+
+.dev-logs-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dev-logs-scroll::-webkit-scrollbar-thumb {
+  background-color: #000000;
+  border-radius: 999px;
 }
 
 /* Animation Classes */
