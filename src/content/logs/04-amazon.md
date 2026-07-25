@@ -39,6 +39,7 @@ updates, organize schedules intelligently, answer campus-related questions
 instantly, and proactively help students manage everyday academic and
 personal life?
 ```
+---
 
 ### the assignment and the work
 
@@ -47,6 +48,8 @@ I was the "lead", so backend went to Yatharth since he knew AWS and we needed a 
 So we WORKED.
 
 48 hours. Let me tell you what we built.
+
+---
 
 ### the idea
 _(IDEA SLOP TIME)_
@@ -74,6 +77,8 @@ There is also **time-decay notification logic** which i think is very clever (it
 
 The whole thing also has a **RAG-based chat**. You can ask "what's due today?" and it answers from your actual live data, not from some generic AI that doesn't know your schedule. No vector database, no embeddings. Lambda just pulls your current feed and todos from S3 and injects them directly into the prompt. The student's entire academic world fits in one context window. (This is a brag. I am bragging. I hope you are bragged.)
 
+---
+
 **the stack**
 
 Frontend was Expo + React Native so we could target both Android and iOS from one codebase. Backend was fully serverless, used AWS Lambda + API Gateway + Node.js. AI classification via AWS Bedrock (in the PRD, irl it was groq, shhh). S3 as the primary data store (no traditional database, just per-user JSON folders). AWS SNS for push notifications. EventBridge for triggering Google Classroom syncs every 15 minutes. And `whatsapp-web.js` on EC2 for the WhatsApp connection.
@@ -83,6 +88,7 @@ We basically said we are doing the same thing, but for students. WhatsApp replac
 
 *(the PRD is linked at the bottom if you want the full thing. it is a real document and not a youtube link. i promise. scroll to find out.)*
 
+---
 ### the connections
 
 Okay so the idea sounds clean. The connections were NOT clean NOT AT ALL.
@@ -117,6 +123,8 @@ We built push notifications into the architecture. AWS SNS sending to Expo's pus
 We did not show it in the demo video.
 
 I still think about this. We had it working and we just... didn't demo it. Did that cost us the selection? I genuinely don't know. Maybe. Probably. Push notifications are literally the whole point of a notification aggregator and we didn't show them running.
+
+---
 
 ### the result
 

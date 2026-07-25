@@ -8,6 +8,16 @@
  */
 const projects = [
   {
+  title: "fishHer",
+  description: "a first-person horror game made for the S.T.E.M Jam 2026, exploring themes of inherited patterns and consequences. built in unity over seven days, featuring shifting environments, a PSX-inspired aesthetic and a unique narrative approach.",
+  skills: ["unity engine", "procedural atmosphere scripting", "custom post-processing & shaders", "modular character controller integration", "audio state management"],
+  what: "you play a man going through the same daily fishing ritual, day after day. The environment shifts subtly at first—water color, fog density, the type of fish you catch. The music warps. You're just doing the same things you've always done, but something is coming into focus.",
+  why: "I wanted to make a horror game that wasn't about jump scares. The theme was 'ECHO,' so I leaned into inherited patterns and consequences that ripple outwards in ways you can't control. The goal was dread, not shock but something that lingers in the quiet moments.",
+  liveLink: "https://gurgames.itch.io/fishher",
+  liveMessage: null,
+  githubLink: "https://github.com/GurKalra/FishHer"
+  },
+  {
     title: "prescient",
     description: "a proactive, root-level linux system guardian. it hooks directly into native package managers to predict, prevent, and recover from system-breaking os updates before execution.",
     skills: ["linux system architecture", "python & pytest", "btrfs & timeshift", "bash & posix scripts", "multi-threaded tui"],
@@ -27,7 +37,7 @@ const projects = [
     liveMessage: null,
     githubLink: "https://github.com/GurKalra/Slither-Fade"
   },
-    {
+  {
     title: "twisteeper",
     description: "a minesweeper variant built in godot during a two-day game development challenge. it introduces innovative mechanics like rotating boards and immovable flagged cells, complete with custom pixel art and cross-platform deployment.",
     skills: ["godot engine & gdscript", "grid generation & logic", "custom rotation mechanics", "pixel art integration", "cross-platform deployment"],
@@ -36,6 +46,16 @@ const projects = [
     liveLink: "https://gurgames.itch.io/twisteeper",
     liveMessage: null,
     githubLink: "https://github.com/GurKalra/twisteeper"
+  },
+  {
+    title: "gem catcher",
+    description: "a 2d game developed in godot using c#. it features an optimized core gameplay loop focused on simplicity and replayability, with custom mechanics for object spawning and collision detection.",
+    skills: ["godot engine", "c# scripting", "2d game mechanics", "collision detection", "object spawning"],
+    what: "a 2d arcade game built in godot with c#. gems spawn at randomized positions with increasing frequency. the player catches them with collision-based mechanics while avoiding obstacles on a progressively difficult loop.",
+    why: "sometimes the best learning comes from simplicity. gem catcher was a focused exercise in godot's core systems (collision, spawning, state management), i wanted to strip the complexity to master the fundamentals.",
+    liveLink: "https://gurgames.itch.io/gem-catcher",
+    liveMessage: null,
+    githubLink: "https://github.com/GurKalra/Gem-Catcher"
   },
   {
     title: "insightnet",
@@ -57,16 +77,6 @@ const projects = [
     liveMessage: null,
     githubLink: "https://github.com/GurKalra/LabTA"
   },
-  {
-    title: "gem catcher",
-    description: "a 2d game developed in godot using c#. it features an optimized core gameplay loop focused on simplicity and replayability, with custom mechanics for object spawning and collision detection.",
-    skills: ["godot engine", "c# scripting", "2d game mechanics", "collision detection", "object spawning"],
-    what: "a 2d arcade game built in godot with c#. gems spawn at randomized positions with increasing frequency. the player catches them with collision-based mechanics while avoiding obstacles on a progressively difficult loop.",
-    why: "sometimes the best learning comes from simplicity. gem catcher was a focused exercise in godot's core systems (collision, spawning, state management), i wanted to strip the complexity to master the fundamentals.",
-    liveLink: "https://gurgames.itch.io/gem-catcher",
-    liveMessage: null,
-    githubLink: "https://github.com/GurKalra/Gem-Catcher"
-  }
 ];
 
 const linkSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>`;
